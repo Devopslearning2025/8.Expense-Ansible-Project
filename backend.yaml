@@ -1,5 +1,10 @@
 - name: installing and configring the backend
   hosts: backend
+  vars:
+    db: db.devopslearning2025.online
+  vars_prompt:
+  - name: root_password
+    prompt: "Enter DB password"
   become: yes
   tasks:
     - name: disabling default nodejs
@@ -42,3 +47,18 @@
       ansible.builtin.copy:
         src: /home/ec2-user/Ansible-Project
         dest: /etc/systemd/system/backend.service
+      
+    - name: installing pythin mysql dependencies
+      ansible.builtin.pip:
+        name: 
+        - PyMySQL
+        - cryptography
+        executable: pip3.9 #for python 3.9
+
+    - name: check db connection
+      community.mysql.mysql_db:
+        login_user: root
+        login_password: "{{root_password}}"
+        login_host: "{{db}}"
+        target: /app/schema/backend.sql
+        state: dump
