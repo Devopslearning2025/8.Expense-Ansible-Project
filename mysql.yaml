@@ -13,6 +13,15 @@
         state: started
         enabled: yes
 
+    - name: installing pythin mysql dependencies
+      ansible.builtin.pip:
+        name: 
+        - PyMySQL
+        - cryptography
+      executable: pip3.9 #for python 3.9
+        state: latest
+
+
     #check password is already setup or not
     - name: check db connection
       community.mysql.mysql_info:
@@ -22,6 +31,7 @@
         filter: version
       ignore_errors: yes
       register: db_connection_results
+
     - name: check the db connection results
       debug:
         msg: "{{ db_connection_results }}"
