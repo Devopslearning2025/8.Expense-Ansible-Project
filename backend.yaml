@@ -2,10 +2,10 @@
   hosts: backend
   become: yes
   tasks:
-    - name: disabled nodejs
+    - name: disabling default nodejs
       ansible.builtin.command: dnf module disable nodejs -y
 
-    - name: enabling the node js
+    - name: enabling the node js:20
       ansible.builtin.command: dnf module enable nodejs:20 -y
 
     - name: installing nodes js
@@ -22,18 +22,23 @@
         path: /app
         state: directory
 
-    - name: downlod the backend code
+    - name: downloding the backend code
       ansible.builtin.get_url:
         url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
         dest: /tmp/backend.zip
               
-    - name: unzip backend code
+    - name: unzipping backend code
       ansible.builtin.unarchive:
         src: /tmp/backend.zip
         dest: /app
         remote_src: yes
 
-    - name: install npm dependices  
+    - name: installing npm dependices  
       ansible.builtin.command: npm install
       args:
         chdir: /app
+    
+    - name: copying the backend.service
+      ansible.builtin.copy:
+      src: /home/ec2-user/Ansible-Project
+      dest: /etc/systemd/system/backend.service
