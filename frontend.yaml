@@ -20,6 +20,6 @@
 
     - name: Create html directory
       ansible.builtin.copy:
-        path: /usr/share/nginx/html/
+        name: /usr/share/nginx/html/
         state: directory
     
