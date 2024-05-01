@@ -5,5 +5,10 @@
     - name: nginx install
       ansible.builtin.dnf:
         name: nginx
+        state: installed
+        
+    - name: starting the nginx
+      ansible.builtin.servie:
+        name: nginx
         state: started
         enabled: yes
