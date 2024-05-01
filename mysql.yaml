@@ -1,5 +1,8 @@
 - name: installing and configuring the mysql
   hosts: db
+  vars_prompt:
+  - name: root_password
+    prompt: Enter rot password
   become: yes
   tasks:
     - name: Installing the mysql
@@ -33,3 +36,7 @@
     - name: check the db connection results
       debug:
         msg: "{{ db_connection_results }}"
+    
+    - name: setting up root password
+      ansible.builtin.command: "mysql_secure_installation --set-root-pass {{root_password}}"
+      when: db_connection_results.failed is true
