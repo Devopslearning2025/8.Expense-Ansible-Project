@@ -4,17 +4,29 @@
   tasks:
     - name: disabled nodejs
       ansible.builtin.command: dnf module disable nodejs -y
+
     - name: enabling the node js
       ansible.builtin.command: dnf module enable nodejs:20 -y
+
     - name: installing nodes js
       ansible.builtin.dnf:
         name: nodejs
         state: installed
+
     - name: creating user
       ansible.builtin.user:
         name: expense
-        state: present
+
     - name: creating /app directory
       ansible.builtin.file:
         path: /app
         state: directory
+    - name: downlod the backend code
+      ansible.builtin.get_url:
+        url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+        dest: /tmp/backend.zip
+      
+    - name: unzip backend code
+      ansible.builtin.anarchive:
+        src: /tmp/backend.zip
+        dest: /app
