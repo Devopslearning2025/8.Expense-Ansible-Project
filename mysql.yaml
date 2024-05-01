@@ -19,8 +19,6 @@
         - PyMySQL
         - cryptography
       executable: pip3.9 #for python 3.9
-        state: latest
-
 
     #check password is already setup or not
     - name: check db connection
