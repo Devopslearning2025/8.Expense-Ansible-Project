@@ -3,6 +3,7 @@
   vars_prompt:
   - name: root_password
     prompt: Enter rot password
+    private: no
   become: yes
   tasks:
     - name: Installing the mysql
