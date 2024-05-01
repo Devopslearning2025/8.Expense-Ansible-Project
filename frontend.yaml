@@ -1,13 +1,9 @@
-- name: 
+- name: nginx installation and configireation with backend
   hosts: frontend
   become: yes
   tasks:
     - name: nginx install
-      ansible.builtit.dnf:
+      ansible.builtin.dnf:
         name: nginx
         state: started
         enabled: yes
-
-    - name: remove the default files  
-      ansible.built.file:
-        src      
