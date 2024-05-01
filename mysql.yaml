@@ -1,0 +1,8 @@
+- name: installing and configuring the mysql
+  hosts: db
+  become: yes
+  tasks:
+    - name: Installing the mysql
+      ansible.builtin.dnf:
+        name: mysql-server
+        state: latest
