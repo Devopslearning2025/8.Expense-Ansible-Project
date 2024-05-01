@@ -1,0 +1,19 @@
+- name: installing and configring the backend
+  hosts: backend
+  tasks:
+    - name: disabled nodejs
+      ansible.builtin.command: dnf module disable nodejs -y
+    - name: enabling the node js
+      ansible.builtin.command: dnf module enable nodejs:20 -y
+    - name: installing nodes js
+      ansible.builtin.dnf:
+        name: nodejs
+        state: installed
+    - name: creating user
+      ansible.builtin.user:
+        name: expense
+        state: present
+    - name: creating /app directory
+      ansible.builtin.file:
+        path: /app
+        state: directory
