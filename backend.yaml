@@ -20,7 +20,7 @@
       loop:
       - nodejs
       - mysql
-      
+
     - name: creating user
       ansible.builtin.user:
         name: expense
@@ -48,7 +48,7 @@
     
     - name: copying the backend.service
       ansible.builtin.copy:
-        src: /home/ec2-user/Ansible-Project
+        src: /home/ec2-user/Ansible-Project/backend.service
         dest: /etc/systemd/system/backend.service
       
     - name: installing pythin mysql dependencies
