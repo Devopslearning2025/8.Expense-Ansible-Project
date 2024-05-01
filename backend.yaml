@@ -33,7 +33,5 @@
         dest: /app
         remote_src: yes
 
-    - name: install npm dependices
-      ansible.builtin.command: npm install
-        name: npm
-        state: latest
+    #- name: install npm dependices
+      #ansible.builtin.command: npm install
