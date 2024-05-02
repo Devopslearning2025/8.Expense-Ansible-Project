@@ -18,8 +18,8 @@
         state: started
         enabled: yes
 
-    - name: checking the mysql -assword is already set or not
-      community.mysql.mysql.info:
+    - name: checking the mysql password is already set or not
+      community.mysql.mysql_info:
         login_user: root
         login_password: "{{root_password}}"
         login_host: "{{host}}"
