@@ -19,7 +19,7 @@
         enabled: yes
     
     - name: install mysql dependencies
-      ansible.builtiin.dnf:
+      ansible.builtin.dnf:
         name: PyMySQL
         state: latest
 
