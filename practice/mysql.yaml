@@ -29,16 +29,16 @@
     - name: checking the mysql password is already set or not
       community.mysql.mysql_info:
         login_user: root
-        login_password: "{{root_password}}"
-        login_host: "{{host}}"
+        login_password: ExpenseApp@1
+        login_host: "{{ host }}"
         filter: version
       ignore_errors: yes
       register: db_connection_output
         
     - name: check the db connection results
       debug:
-        msg: "{{db_connection_output}}"
+        msg: "{{ db_connection_output }}"
 
     - name: settng the root password
-      ansible.builtin.command: "mysql_secure_installation --set-root-pass ExpenseApp@1"
+      ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ root_password }}"
       when: db_connection_output.failed is true
