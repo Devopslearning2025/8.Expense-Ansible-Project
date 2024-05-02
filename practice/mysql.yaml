@@ -1,5 +1,7 @@
 - name: onstalling and configuring mysql
   hosts: db
+  vars:
+    host: db.devopslearning2025.online
   vars_prompt:
   - name: root_password
     prompt: Enter DB password
@@ -15,6 +17,18 @@
         name: mysqld
         state: started
         enabled: yes
-    
-    - name: msettng the root password
+
+    - name: checking the mysql -assword is already set or not
+      community.mysql.mysql.info:
+        login_user: root
+        login_password: "{{root_password}}"
+        login_host: "{{host}}"
+        filter: version
+      register: db_connection_output
+        
+    - name: check the db connection results
+      debug:
+        msg: "{{db_connection_output}}"
+
+    - name: settng the root password
       ansible.builtin.command: "mysql_secure_installation --set-root-pass {{root_password}}"
