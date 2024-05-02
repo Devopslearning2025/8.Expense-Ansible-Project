@@ -6,3 +6,9 @@
       ansible.builtin.dnf:
         name: mysql
         state: latest
+    
+    - name: starting and enabling the mysql\
+      ansibile.builtin.service:
+        name: mysql
+        state: started
+        enabled: yes
