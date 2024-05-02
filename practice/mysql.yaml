@@ -39,6 +39,10 @@
       debug:
         msg: "{{ db_connection_output }}"
 
-    - name: settng the root password
-      ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ root_password }}"
-      when: db_connection_output.failed is true
+    #- name: settng the root password
+     # ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ root_password }}"
+     # when: db_connection_output.failed is true
+    
+    - name: setting up root password
+      ansible.builtin.command: "mysql_secure_installation --set-root-pass {{root_password}}"
+      when: ddb_connection_output.failed is true #don't give {{ }} in when condition
