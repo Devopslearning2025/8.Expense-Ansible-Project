@@ -17,6 +17,11 @@
         name: mysqld
         state: started
         enabled: yes
+    
+    - name: install mysql dependencies
+      ansible.builtiin.dnf:
+        name: PyMySQL
+        state: latest
 
     - name: checking the mysql password is already set or not
       community.mysql.mysql_info:
@@ -32,3 +37,4 @@
 
     - name: settng the root password
       ansible.builtin.command: "mysql_secure_installation --set-root-pass {{root_password}}"
+      when: db_connection_output.
