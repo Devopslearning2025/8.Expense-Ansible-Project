@@ -18,10 +18,14 @@
         state: started
         enabled: yes
     
+    #Install python mysql dependencies
     - name: install mysql dependencies
-      ansible.builtin.dnf:
-        name: MySQL-python
-        state: latest
+      ansible.builtin.pip:
+        name: "{{item}}"
+        loop:
+        - MySQL-python
+        - cryptography
+      executable: pip3.9
 
     - name: checking the mysql password is already set or not
       community.mysql.mysql_info:
