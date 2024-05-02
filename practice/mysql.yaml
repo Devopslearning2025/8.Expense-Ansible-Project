@@ -20,7 +20,7 @@
     
     - name: install mysql dependencies
       ansible.builtin.dnf:
-        name: PyMySQL
+        name: MySQL-python
         state: latest
 
     - name: checking the mysql password is already set or not
