@@ -32,3 +32,15 @@
       src: /tmp/expense-backend-v2.zip
       dest: /app
       remote_src: yes
+  
+  - name: Lets download the dependencies.
+    ansible.builtin.command: npm install
+     args:
+        chdir: /app
+
+  - name: COpt the vim /etc/systemd/system/backend.service
+    ansible.builtin.copy:
+      src: backend.service
+      dest: /etc/systemd/system/backend.service
+      remote_src: yes
+
