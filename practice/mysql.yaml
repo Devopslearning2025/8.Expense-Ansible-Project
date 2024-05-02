@@ -1,7 +1,7 @@
 - name: onstalling and configuring mysql
   hosts: db
   vars:
-    host: db.devopslearning2025.online
+    host: 172.31.16.89
   vars_prompt:
   - name: root_password
     prompt: Enter DB password
