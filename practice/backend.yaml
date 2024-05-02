@@ -5,10 +5,19 @@
   - name: Disabling the default nodejs
     ansible.builtin.command: dnf module disable nodejs -y
   
-  - name: Enabling the default nodejs
+  - name: Enabling the nodejs:20
     ansible.builtin.command: dnf module enable nodejs:20 -y
   
   - name: Installing dnf module enable nodejs:20 -y
     ansible.builtin.dnf:
       name: nodejs
       state: latest
+  
+  - name: Adding Application user
+    ansible.builtin.user:
+      user: expense
+
+  - name: Creating the Application Directory
+    ansible.built.file:
+      path: /app
+      state: present
