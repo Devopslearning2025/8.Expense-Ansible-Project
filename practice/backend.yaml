@@ -35,8 +35,8 @@
   
   - name: Lets download the dependencies.
     ansible.builtin.command: npm install
-     args:
-        chdir: /app
+    args:
+      chdir: /app
 
   - name: COpt the vim /etc/systemd/system/backend.service
     ansible.builtin.copy:
