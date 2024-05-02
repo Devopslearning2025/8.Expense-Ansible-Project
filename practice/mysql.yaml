@@ -1,44 +1,44 @@
 - name: onstalling and configuring mysql
   hosts: db
+  become: yes
   vars:
     host: db.devopslearning2025.online
   vars_prompt:
   - name: root_password
     prompt: Enter DB password
-  become: yes
   tasks:
-    - name: installing mysql-server
-      ansible.builtin.dnf:
-        name: mysql-server
-        state: latest
+  - name: installing mysql-server
+    ansible.builtin.dnf:
+      name: mysql-server
+      state: latest
     
-    - name: starting and enabling the mysql
-      ansible.builtin.service:
-        name: mysqld
-        state: started
-        enabled: yes
+  - name: starting and enabling the mysql
+    ansible.builtin.service:
+      name: mysqld
+      state: started
+      enabled: yes
     
     #Install python mysql dependencies
-    - name: install python mysql dependencies
-      ansible.builtin.pip:
-        name:
-        - PyMySQL
-        - cryptography
-        executable: pip3.9 # pip3.11 if python version is 3.11
+  - name: install python mysql dependencies
+    ansible.builtin.pip:
+      name:
+      - PyMySQL
+      - cryptography
+      executable: pip3.9 # pip3.11 if python version is 3.11
 
-    - name: check DB connection
-      community.mysql.mysql_info:
-        login_user: root
-        login_password: "{{ root_password }}"
-        login_host: "{{ host }}"
-        filter: version
-      ignore_errors: yes
-      register: db_connection_output
+  - name: check DB connection
+    community.mysql.mysql_info:
+      login_user: root
+      login_password: "{{ root_password }}"
+      login_host: "{{ host }}"
+      filter: version
+    ignore_errors: yes
+    register: db_connection_output
         
-    - name: check the db connection results
-      debug:
-        msg: "Output:  {{ db_connection_output }}"
+  - name: check the db connection results
+    debug:
+      msg: "Output:  {{ db_connection_output }}"
  
-    - name: setting up root password
-      ansible.builtin.command: "mysql_secure_installation --set-root-pass {{root_password}}"
-      when: ddb_connection_output.failed is true #don't give {{ }} in when condition
+  - name: setting up root password
+    ansible.builtin.command: "mysql_secure_installation --set-root-pass {{root_password}}"
+    when: ddb_connection_output.failed is true #don't give {{ }} in when condition
