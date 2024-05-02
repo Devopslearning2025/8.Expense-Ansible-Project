@@ -26,10 +26,19 @@
         - cryptography
         executable: pip3.9
 
-    - name: checking the mysql password is already set or not
+    #- name: checking the mysql password is already set or not
+     # community.mysql.mysql_info:
+      #  login_user: root
+     #   login_password: "{{root_password}}"
+     #   login_host: "{{ host }}"
+     #   filter: version
+    #  ignore_errors: yes
+    #  register: db_connection_output
+
+    - name: check DB connection
       community.mysql.mysql_info:
         login_user: root
-        login_password: "{{root_password}}"
+        login_password: "{{ root_password }}"
         login_host: "{{ host }}"
         filter: version
       ignore_errors: yes
