@@ -20,4 +20,4 @@
   - name: Creating the Application Directory
     ansible.builtin.file:
       path: /app
-      state: present
+      state: directory
