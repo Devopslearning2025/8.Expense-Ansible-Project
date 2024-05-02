@@ -1,5 +1,8 @@
 - name: onstalling and configuring mysql
   hosts: db
+  vars_prompt:
+  - name: root_password
+    prompt: Enter DB password
   become: yes
   tasks:
     - name: installing mysql-server
@@ -12,3 +15,6 @@
         name: mysqld
         state: started
         enabled: yes
+    
+    - name: msettng the root password
+      ansible.builtin.command: "mysql_secure_installation --set-root-pass {{root_password}}"
