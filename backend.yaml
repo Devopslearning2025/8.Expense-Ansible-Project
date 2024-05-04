@@ -57,8 +57,8 @@
         - PyMySQL
         - cryptography
         executable: pip3.9 #for python 3.9
-
-    - name: check db connection
+#Import data into mysql
+    - name: import data into mysql
       community.mysql.mysql_db:
         login_user: root
         login_password: "{{root_password}}"
